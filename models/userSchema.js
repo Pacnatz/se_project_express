@@ -1,0 +1,23 @@
+const mongoose = require("mongoose");
+const validator = require("validator");
+
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: [true, "Username is required"],
+    minlength: 2,
+    maxLength: 30,
+  },
+  avatar: {
+    type: String,
+    required: [true, "Avatar URL is required"],
+    validate: {
+      validator(value) {
+        return validator.isURL(value);
+      },
+      message: "You must provide a valid URL for the avatar.",
+    },
+  },
+});
+
+module.exports = mongoose.model("user", userSchema);
