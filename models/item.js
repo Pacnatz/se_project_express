@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema({
   },
   weather: {
     type: String,
-    required: [true, "Weather URL is required"],
+    required: [true, "Weather type is required"],
     enum: ["hot", "warm", "cold"],
   },
   imageUrl: {
