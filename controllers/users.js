@@ -10,7 +10,9 @@ const getUsers = (req, res) => {
     .then((users) => res.status(200).send(users))
     .catch((err) => {
       console.error(err);
-      return res.status(SERVER_ERROR_CODE).send({ message: err.message });
+      return res
+        .status(SERVER_ERROR_CODE)
+        .send({ message: "An error has occurred on the server." });
     });
 };
 
@@ -29,7 +31,9 @@ const getUser = (req, res) => {
           .status(BAD_REQUEST_CODE)
           .send({ message: "Invalid user ID format" });
       }
-      return res.status(SERVER_ERROR_CODE).send({ message: err.message });
+      return res
+        .status(SERVER_ERROR_CODE)
+        .send({ message: "An error has occurred on the server." });
     });
 };
 
@@ -40,9 +44,13 @@ const createUser = (req, res) => {
     .catch((err) => {
       console.error(err);
       if (err.name === "ValidationError") {
-        return res.status(BAD_REQUEST_CODE).send({ message: err.message });
+        return res
+          .status(BAD_REQUEST_CODE)
+          .send({ message: "Invalid user data" });
       }
-      return res.status(SERVER_ERROR_CODE).send({ message: err.message });
+      return res
+        .status(SERVER_ERROR_CODE)
+        .send({ message: "An error has occurred on the server." });
     });
 };
 

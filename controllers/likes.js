@@ -8,7 +8,7 @@ const {
 const likeItem = (req, res) =>
   Item.findByIdAndUpdate(
     req.params.itemId,
-    { $addToSet: { likes: req.owner._id } }, // add _id to the array if it's not there yet
+    { $addToSet: { likes: req.user._id } }, // add _id to the array if it's not there yet
     { new: true }
   )
     .orFail()
@@ -23,13 +23,15 @@ const likeItem = (req, res) =>
           .status(BAD_REQUEST_CODE)
           .send({ message: "Invalid item ID format" });
       }
-      return res.status(SERVER_ERROR_CODE).send({ message: err.message });
+      return res
+        .status(SERVER_ERROR_CODE)
+        .send({ message: "An error has occurred on the server." });
     });
 
 const dislikeItem = (req, res) =>
   Item.findByIdAndUpdate(
     req.params.itemId,
-    { $pull: { likes: req.owner._id } }, // remove _id from the array
+    { $pull: { likes: req.user._id } }, // remove _id from the array
     { new: true }
   )
     .orFail()
@@ -44,7 +46,9 @@ const dislikeItem = (req, res) =>
           .status(BAD_REQUEST_CODE)
           .send({ message: "Invalid item ID format" });
       }
-      return res.status(SERVER_ERROR_CODE).send({ message: err.message });
+      return res
+        .status(SERVER_ERROR_CODE)
+        .send({ message: "An error has occurred on the server." });
     });
 
 module.exports = {

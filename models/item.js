@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
     type: String,
     required: [true, "Item name is required"],
     minlength: 2,
-    maxLength: 30,
+    maxlength: 30,
   },
   weather: {
     type: String,
@@ -29,8 +29,8 @@ const itemSchema = new mongoose.Schema({
     required: [true, "Owner is required"],
   },
   likes: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "user",
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+    default: [],
   },
   createdAt: {
     type: Date,

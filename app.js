@@ -17,7 +17,7 @@ mongoose
   });
 
 app.use((req, res, next) => {
-  req.owner = {
+  req.user = {
     _id: "696fd1949d39c2d598b3dd71", // Hard code a user ID for each request
   };
   next();
