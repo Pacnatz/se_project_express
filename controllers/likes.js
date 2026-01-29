@@ -1,4 +1,4 @@
-const Item = require("../models/item");
+const clothingItem = require("../models/item");
 const {
   SERVER_ERROR_CODE,
   BAD_REQUEST_CODE,
@@ -6,11 +6,12 @@ const {
 } = require("../utils/errors");
 
 const likeItem = (req, res) =>
-  Item.findByIdAndUpdate(
-    req.params.itemId,
-    { $addToSet: { likes: req.user._id } }, // add _id to the array if it's not there yet
-    { new: true }
-  )
+  clothingItem
+    .findByIdAndUpdate(
+      req.params.itemId,
+      { $addToSet: { likes: req.user._id } }, // add _id to the array if it's not there yet
+      { new: true }
+    )
     .orFail()
     .then((item) => res.status(200).send(item))
     .catch((err) => {
@@ -29,11 +30,12 @@ const likeItem = (req, res) =>
     });
 
 const dislikeItem = (req, res) =>
-  Item.findByIdAndUpdate(
-    req.params.itemId,
-    { $pull: { likes: req.user._id } }, // remove _id from the array
-    { new: true }
-  )
+  clothingItem
+    .findByIdAndUpdate(
+      req.params.itemId,
+      { $pull: { likes: req.user._id } }, // remove _id from the array
+      { new: true }
+    )
     .orFail()
     .then((item) => res.status(200).send(item))
     .catch((err) => {

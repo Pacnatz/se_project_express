@@ -7,6 +7,7 @@ const {
   BAD_REQUEST_CODE,
   NOT_FOUND_CODE,
   RESOURCE_CONFLICT_CODE,
+  UNAUTHORIZED_CODE,
 } = require("../utils/errors");
 
 // Needs authorization to get list of all users
@@ -81,9 +82,12 @@ const loginUser = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
+      if (err.message === "Incorrect email or password") {
+        return res.status(UNAUTHORIZED_CODE).send({ message: err.message });
+      }
       return res
-        .status(BAD_REQUEST_CODE)
-        .send({ message: "Incorrect email or password" });
+        .status(SERVER_ERROR_CODE)
+        .send({ message: "An error has occurred on the server." });
     });
 };
 
