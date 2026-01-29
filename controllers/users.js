@@ -86,8 +86,8 @@ const loginUser = (req, res) => {
         return res.status(UNAUTHORIZED_CODE).send({ message: err.message });
       }
       return res
-        .status(SERVER_ERROR_CODE)
-        .send({ message: "An error has occurred on the server." });
+        .status(BAD_REQUEST_CODE)
+        .send({ message: "Incorrect email or password" });
     });
 };
 
