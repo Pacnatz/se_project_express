@@ -7,7 +7,6 @@ const {
   BAD_REQUEST_CODE,
   NOT_FOUND_CODE,
   RESOURCE_CONFLICT_CODE,
-  UNAUTHORIZED_CODE,
 } = require("../utils/errors");
 
 // Needs authorization to get list of all users
