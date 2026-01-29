@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const mainRouter = require("./routes/index");
 
 const app = express();
 const { PORT = 3001 } = process.env;
 
+app.use(cors());
 app.use(express.json());
 
 mongoose
@@ -15,13 +17,6 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
   });
-
-app.use((req, res, next) => {
-  req.user = {
-    _id: "696fd1949d39c2d598b3dd71", // Hard code a user ID for each request
-  };
-  next();
-});
 
 app.use("/", mainRouter);
 
