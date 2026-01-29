@@ -7,7 +7,7 @@ const {
   BAD_REQUEST_CODE,
   NOT_FOUND_CODE,
   RESOURCE_CONFLICT_CODE,
-  INVALID_CREDENTIALS_CODE,
+  UNAUTHORIZED_CODE,
 } = require("../utils/errors");
 
 const getUsers = (req, res) => {
@@ -82,7 +82,7 @@ const loginUser = (req, res) => {
     .catch((err) => {
       console.error(err);
       return res
-        .status(INVALID_CREDENTIALS_CODE)
+        .status(UNAUTHORIZED_CODE)
         .send({ message: "Incorrect email or password" });
     });
 };
