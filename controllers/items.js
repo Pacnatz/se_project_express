@@ -3,7 +3,6 @@ const {
   SERVER_ERROR_CODE,
   BAD_REQUEST_CODE,
   NOT_FOUND_CODE,
-  FORBIDDEN_CODE,
 } = require("../utils/errors");
 
 const getItems = (req, res) => {
@@ -37,18 +36,9 @@ const createItem = (req, res) => {
 
 const deleteItem = (req, res) => {
   const { itemId } = req.params;
-  Item.findById(itemId)
+  Item.findByIdAndDelete(itemId)
     .orFail()
-    .then((item) => {
-      if (item.owner.toString() !== req.user._id) {
-        return res
-          .status(FORBIDDEN_CODE)
-          .send({ message: "You do not have permission to delete this item" });
-      }
-      return Item.findByIdAndDelete(itemId).then(() =>
-        res.status(200).send({ message: "Item deleted successfully" })
-      );
-    })
+    .then(() => res.status(200).send({ message: "Item deleted successfully" }))
     .catch((err) => {
       console.error(err);
       if (err.name === "DocumentNotFoundError") {

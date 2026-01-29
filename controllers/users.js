@@ -10,7 +10,6 @@ const {
   UNAUTHORIZED_CODE,
 } = require("../utils/errors");
 
-// Needs authorization to get list of all users
 const getUsers = (req, res) => {
   User.find({})
     .then((users) => res.status(200).send(users))
@@ -22,9 +21,9 @@ const getUsers = (req, res) => {
     });
 };
 
-const getCurrentUser = (req, res) => {
-  const { _id } = req.user;
-  User.findById(_id)
+const getUser = (req, res) => {
+  const { id } = req.params;
+  User.findById(id)
     .orFail()
     .then((user) => res.status(200).send(user))
     .catch((err) => {
@@ -83,42 +82,14 @@ const loginUser = (req, res) => {
     .catch((err) => {
       console.error(err);
       return res
-        .status(BAD_REQUEST_CODE)
+        .status(UNAUTHORIZED_CODE)
         .send({ message: "Incorrect email or password" });
-    });
-};
-
-const updateProfile = (req, res) => {
-  const { name, avatar } = req.body;
-  const { _id } = req.user;
-
-  User.findByIdAndUpdate(
-    _id,
-    { name, avatar },
-    { new: true, runValidators: true }
-  )
-    .orFail()
-    .then((user) => res.status(200).send(user))
-    .catch((err) => {
-      console.error(err);
-      if (err.name === "DocumentNotFoundError") {
-        return res.status(NOT_FOUND_CODE).send({ message: "User not found" });
-      }
-      if (err.name === "ValidationError") {
-        return res
-          .status(BAD_REQUEST_CODE)
-          .send({ message: "Invalid data for profile update" });
-      }
-      return res
-        .status(SERVER_ERROR_CODE)
-        .send({ message: "An error has occurred on the server." });
     });
 };
 
 module.exports = {
   getUsers,
-  getCurrentUser,
+  getUser,
   createUser,
   loginUser,
-  updateProfile,
 };
