@@ -11,10 +11,10 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: [true, "Avatar URL is required"],
+    required: false,
     validate: {
       validator(value) {
-        return validator.isURL(value);
+        return !value || validator.isURL(value);
       },
       message: "You must provide a valid URL for the avatar.",
     },
