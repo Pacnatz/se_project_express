@@ -64,7 +64,7 @@ The server runs on **port 3001** by default.
 ### Base URL
 
 ```
-http://localhost:3001
+ttfs.zinergy.net
 ```
 
 ### Authentication Routes
@@ -171,10 +171,15 @@ se_project_express/
     └── tests.yml
 ```
 
-## Project Pitch Video
+:
 
-Check out [this video](https://drive.google.com/file/d/1IcIbikVTsbDP-3FydYF2z8i5Ij23S_Km/view?usp=sharing), where I describe my
-project and some challenges I faced while building it.
+## Project Pitch Videos
+
+Check out these videos, where I describe my project
+and some challenges I faced while building it:
+
+- [WTWR Frontend](https://drive.google.com/file/d/1PYEj3XGuQZxeJunGi-1ull2oXVoOYHxS/view?usp=sharing)
+- [WTWR Backend](https://drive.google.com/file/d/1HCZqeSgEFA-XhSDkGSGd3W781Ft_gyoi/view?usp=sharing)
 
 ## Author
 
