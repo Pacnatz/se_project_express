@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -5,7 +6,6 @@ const { errors } = require("celebrate");
 const { requestLogger, errorLogger } = require("./middlewares/loggers");
 const mainRouter = require("./routes/index");
 const errorHandler = require("./middlewares/error-handler");
-require("dotenv").config();
 
 const app = express();
 const { PORT = 3001 } = process.env;
@@ -21,14 +21,6 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
   });
-
-// Dummy auth middlware THIS IS REQUIRED FOR GITHUB ACTIONS TO PASS
-app.use((req, res, next) => {
-  req.user = {
-    _id: "5d8b8592978f8bd833ca8133",
-  };
-  next();
-});
 
 app.use(requestLogger);
 app.get("/crash-test", () => {

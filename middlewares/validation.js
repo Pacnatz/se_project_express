@@ -1,5 +1,6 @@
 const { Joi, celebrate } = require("celebrate");
 const validator = require("validator");
+const UnauthorizedError = require("../utils/UnauthorizedError");
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
@@ -65,6 +66,20 @@ const validateLoginBody = celebrate({
   }),
 });
 
+const validateUpdateProfileBody = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30).required().messages({
+      "string.empty": 'The "name" field must be filled in',
+      "string.min": 'The "name" field must be at least 2 characters long',
+      "string.max": 'The "name" field must be at most 30 characters long',
+    }),
+    avatar: Joi.string().required().custom(validateURL).messages({
+      "string.empty": 'The "avatar" field must be filled in',
+      "string.uri": 'The "avatar" field must be a valid url',
+    }),
+  }),
+});
+
 const validateObjectId = celebrate({
   params: Joi.object().keys({
     itemId: Joi.string().hex().length(24).required().messages({
@@ -78,5 +93,6 @@ module.exports = {
   validateClothingItemBody,
   validateRegisterBody,
   validateLoginBody,
+  validateUpdateProfileBody,
   validateObjectId,
 };

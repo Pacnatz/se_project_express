@@ -7,15 +7,6 @@ const BadRequestError = require("../utils/BadRequestError");
 const ConflictError = require("../utils/ConflictError");
 const UnauthorizedError = require("../utils/UnauthorizedError");
 
-// Needs authorization to get list of all users
-const getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => res.status(200).send(users))
-    .catch((err) => {
-      next(err);
-    });
-};
-
 const getCurrentUser = (req, res, next) => {
   const { _id } = req.user;
   User.findById(_id)
@@ -94,7 +85,6 @@ const updateProfile = (req, res, next) => {
 };
 
 module.exports = {
-  getUsers,
   getCurrentUser,
   createUser,
   loginUser,

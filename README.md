@@ -2,6 +2,12 @@
 
 A Node.js/Express REST API server for the WTWR application featuring user authentication, clothing item management, and weather-based outfit recommendations.
 
+## Deployed Links
+
+- Frontend (www): https://www.ttfs.zinergy.net
+- Frontend (root): https://ttfs.zinergy.net
+- Backend API: https://api.zinergy.net
+
 ## Table of Contents
 
 - [Features](#features)
@@ -49,7 +55,7 @@ A Node.js/Express REST API server for the WTWR application featuring user authen
    npm install
    ```
 
-3. Ensure MongoDB is running locally on `localhost:27017`
+3. Ensure MongoDB is running on the cloud `mongosh`
 
 ## Running the Project
 
