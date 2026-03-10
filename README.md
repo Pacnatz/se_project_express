@@ -2,6 +2,10 @@
 
 A Node.js/Express REST API server for the WTWR application featuring user authentication, clothing item management, and weather-based outfit recommendations.
 
+## Frontend Repository
+
+-https://github.com/Pacnatz/se_project_react
+
 ## Deployed Links
 
 - Frontend (www): https://www.ttfs.zinergy.net
